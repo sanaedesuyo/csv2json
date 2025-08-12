@@ -1,9 +1,9 @@
-use std::process::exit;
 use clap::Parser;
 use colored::Colorize;
 use csv2json::cli::parser::Args;
 use csv2json::parser::csv_reader::CsvObject;
 use csv2json::parser::parser::parse;
+use std::process::exit;
 
 fn main() {
     let cli = Args::parse();
@@ -52,13 +52,24 @@ fn main() {
 }
 
 fn info(message: &str) {
-    println!("{}{}", "[ INFO] --- ".blue(), message);
+    println!("{}{}", "[ INFO] --- ".blue().bold(), message);
 }
 
 fn warn(message: &str) {
-    println!("{}{}", "[ WARN] --- ".yellow(), message);
+    println!("{}{}", "[ WARN] --- ".yellow().bold(), message);
 }
 
 fn error(message: &str) {
-    println!("{}{}", "[ERROR] --- ".red(), message);
+    println!("{}{}", "[ERROR] --- ".red().bold(), message);
+}
+
+mod test {
+    use crate::{error, info, warn};
+
+    #[test]
+    fn message_test() {
+        info("Message test.");
+        warn("Message test.");
+        error("Message test.");
+    }
 }

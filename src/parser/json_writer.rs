@@ -1,8 +1,8 @@
-use std::fs;
-use std::collections::HashMap;
-use std::io::Write;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::collections::HashMap;
+use std::fs;
+use std::io::Write;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct JsonObject {
@@ -21,7 +21,8 @@ impl JsonObject {
             Err(e) => return Err(format!("Cannot create file {}.\n{}", path, e)),
         };
 
-        file.write_all(text.as_bytes()).map_err(|e| format!("Error writing to {}.\n{}", path, e))?;
+        file.write_all(text.as_bytes())
+            .map_err(|e| format!("Error writing to {}.\n{}", path, e))?;
 
         Ok(())
     }

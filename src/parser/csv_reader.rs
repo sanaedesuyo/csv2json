@@ -38,7 +38,7 @@ impl CsvObject {
                         });
                         csv_object.data.push(data_row);
                     }
-                },
+                }
                 Err(e) => return Err(format!("Error reading CSV file. {}", e)),
             }
         }
